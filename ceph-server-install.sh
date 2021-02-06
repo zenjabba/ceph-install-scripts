@@ -2,7 +2,7 @@
 ##kernel
 wget -O /usr/local/bin/ https://raw.githubusercontent.com/pimlie/ubuntu-mainline-kernel.sh/master/ubuntu-mainline-kernel.sh
 chmod +x /usr/local/bin/ubuntu-mainline-kernel.sh
-sudo /usr/local/bin/ubuntu-mainline-kernel.sh -i
+sudo /usr/local/bin/ubuntu-mainline-kernel.sh -i 5.10.1 --yes
 
 
 ##docker

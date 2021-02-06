@@ -1,4 +1,8 @@
 
+##root password
+password=$(date +%s | sha256sum | base64 | head -c 12)
+echo -e "$password\n$password" | passwd root
+
 ##kernel
 wget -O /usr/local/bin/ https://raw.githubusercontent.com/pimlie/ubuntu-mainline-kernel.sh/master/ubuntu-mainline-kernel.sh
 chmod +x /usr/local/bin/ubuntu-mainline-kernel.sh

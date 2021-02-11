@@ -3,6 +3,13 @@
 password=$(date +%s | sha256sum | base64 | head -c 12)
 echo -e "$password\n$password" | passwd root
 
+## Network Drivers (download only)
+apt update && apt upgrade -y
+cd /root && wget https://content.mellanox.com/ofed/MLNX_OFED-5.2-1.0.4.0/MLNX_OFED_LINUX-5.2-1.0.4.0-ubuntu18.04-x86_64.tgz
+cd /root && tar -xzf MLNX_OFED_LINUX-4.9-2.2.4.0-ubuntu18.04-x86_64.tgz
+#cd MLNX_OFED_LINUX-5.2-1.0.4.0-ubuntu18.04-x86_64
+#sudo ./mlnxofedinstall —upstream-libs —dpdk
+
 ##kernel
 wget -O /usr/local/bin/ https://raw.githubusercontent.com/pimlie/ubuntu-mainline-kernel.sh/master/ubuntu-mainline-kernel.sh
 chmod +x /usr/local/bin/ubuntu-mainline-kernel.sh
@@ -16,6 +23,9 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 sudo apt-get update -y
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io -y
 sudo apt-get upgrade -y 
+
+##install jumpcloud
+curl --tlsv1.2 --silent --show-error --header 'x-connect-key: 64da8e09f6c0f4f9b863a96aae2fec356a1da795' https://kickstart.jumpcloud.com/Kickstart | sudo bash
 
 ##sysctl
 
@@ -54,14 +64,3 @@ net.core.netdev_budget_usecs=5000" > /etc/sysctl.conf
 sysctl -p
 
 
-##cephadm
-echo "deb https://download.ceph.com/debian-octopus/ bionic main" > /etc/apt/sources.list.d/ceph.list
-wget https://download.ceph.com/keys/release.asc
-sudo apt-key add release.asc
-rm release.asc 
-sudo apt update -y
-sudo apt install cephadm -y
-
-## public keys
-mkdir -p /root/.ssh
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDzZaPLXXBlNE9kVBnCyg0micfujNVh+ew5owGG60nR7dlGTBz9PVKYQHOjxhW+V9m0KIltjpUQCsaRvpPMyJG6+xHoTB5tq+XugfIRyuvAu3BiQ23B01ryhTP6mRqkk7Nh6/tn8ISha4es5AxJov7+Cdj8br4AzmnhU4c++aHig4dVzhrC2Nm1y/autCFby8q852hZmsiZniBFk0ggNIYaGes5Yg2hHUJPXVVeYa6WhJvkF/RNd18r7ceGP4jclPXyeBvH9jbpRorlp9csLgtklgtJOhQCup3G9zw8rdZ57fFYBB1+R0jMp1YuTrHeKl8NipDhJb6v+7/kyvCf8Gb/mckPjpVkEukgKHsrVYhIVlg2ZZ9W28LEqC0P12WoqqFKE2jeMTI7lK4haeuaWwEDDM7L/2bWjAETQogU3oPR+mNcK4K2liwu7vk2AXtkKEH4D0va8pjCQiIpXbsm9e+DMeDRRWCnYoeWUOQY/ursXhC0gnG6UmV3bzQfEzm1p40= ceph-ae0bd11a-6639-11eb-9fa4-0050569051a7" > /root/.ssh/authorized_keys

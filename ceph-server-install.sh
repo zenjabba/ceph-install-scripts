@@ -16,7 +16,7 @@ chmod +x /usr/local/bin/ubuntu-mainline-kernel.sh
 sudo /usr/local/bin/ubuntu-mainline-kernel.sh -i 5.10.1 --yes
 
 ##install jumpcloud
-curl --tlsv1.2 --silent --show-error --header 'x-connect-key: 64da8e09f6c0f4f9b863a96aae2fec356a1da795' https://kickstart.jumpcloud.com/Kickstart | sudo bash
+#curl --tlsv1.2 --silent --show-error --header 'x-connect-key: 64da8e09f6c0f4f9b863a96aae2fec356a1da795' https://kickstart.jumpcloud.com/Kickstart | sudo bash
 
 
 ##docker

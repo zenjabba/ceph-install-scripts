@@ -23,7 +23,7 @@ chmod a+x /root/removejumpcloud.sh
 
 ##install jumpcloud script
 echo '#!/bin/bash 
-curl --tlsv1.2 --silent --show-error --header 'x-connect-key: 64da8e09f6c0f4f9b863a96aae2fec356a1da795' https://kickstart.jumpcloud.com/Kickstart | sudo bash' > /root/installjumpcloud.sh
+curl --tlsv1.2 --silent --show-error --header "'x-connect-key: 64da8e09f6c0f4f9b863a96aae2fec356a1da795'" https://kickstart.jumpcloud.com/Kickstart | sudo bash' > /root/installjumpcloud.sh
 chmod a+x /root/installjumpcloud.sh
 /root/installjumpcloud.sh
 
@@ -107,5 +107,5 @@ echo '172.16.1.11 cnode1
 172.16.1.22 cmgr2' >> /etc/hosts
 
 ## Reboot to make the world happy
-echo 'Rebooting Server'
-shutdown -r 10s
+echo 'Time to reboot the server'
+

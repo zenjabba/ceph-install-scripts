@@ -37,7 +37,7 @@ chmod a+x /root/installjumpcloud.sh
 
 ##sysctl
 
-echo "net.ipv4.tcp_window_scaling=1
+echo 'net.ipv4.tcp_window_scaling=1
 net.core.rmem_max=67108864
 net.core.wmem_max=67108864
 net.ipv4.tcp_rmem=4096 87380 33554432
@@ -67,7 +67,7 @@ net.ipv4.conf.all.secure_redirects=0
 net.core.default_qdisc=fq
 fs.inotify.max_user_watches=131072
 net.core.netdev_budget=50000
-net.core.netdev_budget_usecs=5000" > /etc/sysctl.conf
+net.core.netdev_budget_usecs=5000' > /etc/sysctl.conf
 
 sysctl -p
 
@@ -90,7 +90,7 @@ done < $diskfile
 
 ## Put hosts file correctly
 
-echo "172.16.1.11 cnode1
+echo '172.16.1.11 cnode1
 172.16.1.12 cnode2
 172.16.1.13 cnode3
 172.16.1.14 cnode4
@@ -103,8 +103,8 @@ echo "172.16.1.11 cnode1
 172.16.1.23 cnode11
 172.16.1.24 cnode12
 172.16.1.21 cmgr1
-172.16.1.22 cmgr2" >> /etc/hosts
+172.16.1.22 cmgr2' >> /etc/hosts
 
 ## Reboot to make the world happy
-echo "Rebooting Server"
+echo 'Rebooting Server'
 shutdown -r 10s

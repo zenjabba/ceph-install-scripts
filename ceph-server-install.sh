@@ -73,3 +73,7 @@ while read line; do
       wipefs -a -f $line
       dd if=/dev/zero of=$line bs=512 count=2;
 done < $diskfile
+
+## Put hosts file correctly
+
+echo "

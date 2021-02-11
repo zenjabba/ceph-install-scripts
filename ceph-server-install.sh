@@ -5,6 +5,7 @@ echo -e "$password\n$password" | passwd root
 
 ## Network Drivers (download only)
 apt update && apt upgrade -y
+apt install jq -y
 cd /root && wget https://content.mellanox.com/ofed/MLNX_OFED-5.2-1.0.4.0/MLNX_OFED_LINUX-5.2-1.0.4.0-ubuntu18.04-x86_64.tgz
 cd /root && tar -xzf MLNX_OFED_LINUX-4.9-2.2.4.0-ubuntu18.04-x86_64.tgz
 #cd MLNX_OFED_LINUX-5.2-1.0.4.0-ubuntu18.04-x86_64

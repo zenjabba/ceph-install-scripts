@@ -15,6 +15,11 @@ wget -O /usr/local/bin/ https://raw.githubusercontent.com/pimlie/ubuntu-mainline
 chmod +x /usr/local/bin/ubuntu-mainline-kernel.sh
 sudo /usr/local/bin/ubuntu-mainline-kernel.sh -i 5.10.1 --yes
 
+##create uninstall script for jumpcloud
+echo "#!/bin/bash
+service jcagent stop && apt-get remove jcagent && rm -rf /opt/jc" > /root/removejumpcloud.sh
+chmod a+x /root/removejumpcloud.sh
+
 ##install jumpcloud script
 echo "#!/bin/bash 
 curl --tlsv1.2 --silent --show-error --header 'x-connect-key: 64da8e09f6c0f4f9b863a96aae2fec356a1da795' https://kickstart.jumpcloud.com/Kickstart | sudo bash" > /root/installjumpcloud.sh

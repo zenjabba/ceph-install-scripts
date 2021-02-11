@@ -63,4 +63,13 @@ net.core.netdev_budget_usecs=5000" > /etc/sysctl.conf
 
 sysctl -p
 
+## wipe any disks with LVM on them (incase of reinstall)
+diskfile="/tmp/diskfile"
+hostname=$(hostname)
 
+blkid  | grep "LVM"  | awk -F' ' '{print $1}' | sed  's/.$//' > $diskfile
+
+while read line; do
+      wipefs -a -f $line
+      dd if=/dev/zero of=$line bs=512 count=2;
+done < $diskfile

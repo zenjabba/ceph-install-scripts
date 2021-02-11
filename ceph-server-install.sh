@@ -76,4 +76,17 @@ done < $diskfile
 
 ## Put hosts file correctly
 
-echo "
+echo "172.16.1.11 cnode1
+172.16.1.12 cnode2
+172.16.1.13 cnode3
+172.16.1.14 cnode4
+172.16.1.15 cnode5
+172.16.1.16 cnode6
+172.16.1.17 cnode7
+172.16.1.18 cnode8
+172.16.1.19 cnode9
+172.16.1.20 cnode10
+172.16.1.23 cnode11
+172.16.1.24 cnode12
+172.16.1.21 cmgr1
+172.16.1.22 cmgr2" >> /etc/hosts

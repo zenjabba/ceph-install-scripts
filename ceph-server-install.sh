@@ -78,8 +78,14 @@ hostname=$(hostname)
 blkid  | grep "LVM"  | awk -F' ' '{print $1}' | sed  's/.$//' > $diskfile
 
 while read line; do
+      if [ -z "$line" ]
+then
+      echo "Looks like a clean system, no need to scrub disks"
+else
+      echo "Scrubbing Disks $line"
       wipefs -a -f $line
       dd if=/dev/zero of=$line bs=512 count=2;
+      fi 
 done < $diskfile
 
 ## Put hosts file correctly

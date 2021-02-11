@@ -12,7 +12,7 @@ cd /root && tar -xzf MLNX_OFED_LINUX-4.9-2.2.4.0-ubuntu18.04-x86_64.tgz
 #sudo ./mlnxofedinstall —upstream-libs —dpdk
 
 ##kernel
-wget -O /usr/local/bin/ https://raw.githubusercontent.com/pimlie/ubuntu-mainline-kernel.sh/master/ubuntu-mainline-kernel.sh
+wget -O /usr/local/bin/ubuntu-mainline-kernel.sh https://raw.githubusercontent.com/pimlie/ubuntu-mainline-kernel.sh/master/ubuntu-mainline-kernel.sh
 chmod +x /usr/local/bin/ubuntu-mainline-kernel.sh
 sudo /usr/local/bin/ubuntu-mainline-kernel.sh -i 5.10.1 --yes
 

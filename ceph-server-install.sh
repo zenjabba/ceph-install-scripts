@@ -115,6 +115,10 @@ wget -q -O- 'https://download.ceph.com/keys/release.asc' | sudo apt-key add -
 sudo apt update -y
 sudo apt install cephadm -y
 
+
+## Set Permissions
+groupadd -g 32574 curators -r
+
 ## Reboot to make the world happy
 echo 'Time to reboot the server'
 

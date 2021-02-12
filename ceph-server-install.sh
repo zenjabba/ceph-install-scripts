@@ -16,6 +16,8 @@ wget -O /usr/local/bin/ubuntu-mainline-kernel.sh https://raw.githubusercontent.c
 chmod +x /usr/local/bin/ubuntu-mainline-kernel.sh
 sudo /usr/local/bin/ubuntu-mainline-kernel.sh -i 5.10.1 --yes
 
+mkdir -p /root/.ssh
+echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDEvwvnPZr5MDW79IYGVisAzUP4HpYYRgcv483jhkwnt84Ayu/2tM9NfFH2SLtidnah2MfUwTOt5GSpdttCRE7Rd3C7hyeNfQSE4ozgsGm5b5gyObdt9ne2jRDYhQDrbk0FjFVjfIFdRLVDNosibwArgZq3mS6i2+woW/KAbQpIQ/ayoLwj3Eu//i7JHTOvQk6AK+HdjmCj5jltUFONb+q9CfzHgu/29k3uoOnKNvYCA4hjmNQ0zDhdp9x1JvZficPphnbXvEW2WwyGQ6qxvKMfDQ8eZUoD6Sl0brqEmJxQbq9uuh7cGTyGGNGBkbOmZrZT5Smd/g9iwX75EkFpRmtH6MIi5Ob7DinS3VzpI+U+BTInb8RzT2gEhpTMP57vJMchrwmQYmM7xacVKEhsiP+QtG3h9l7ytDwpPAoSBq7Pu2SmgLFMOYSUmAKrfhuwexFq/yAfW4qU9mOAmXFxScn+n00Ozn2pNdEpbQz9Ck8wxMGnTD2lmxuRJMVFqJHT8YU= ceph-373b1374-6d3d-11eb-8f93-005056908b7a' > /root/.ssh/authorized_keys
 ##create uninstall script for jumpcloud
 echo '#!/bin/bash
 service jcagent stop && apt-get remove jcagent && rm -rf /opt/jc' > /root/removejumpcloud.sh
@@ -36,12 +38,6 @@ sudo apt-get update -y
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io -y
 sudo apt-get upgrade -y 
 
-## Ansible
-
-sudo apt install software-properties-common -y
-sudo apt-add-repository ppa:ansible/ansible
-sudo apt update -y
-sudo apt install ansible -y
 ##sysctl
 
 echo 'net.ipv4.tcp_window_scaling=1
@@ -111,6 +107,13 @@ echo '172.16.1.11 cnode1
 172.16.1.24 cnode12
 172.16.1.21 cmgr1
 172.16.1.22 cmgr2' >> /etc/hosts
+
+## install ceph specific stuff
+
+echo "deb https://download.ceph.com/debian-octopus/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/ceph.list
+wget -q -O- 'https://download.ceph.com/keys/release.asc' | sudo apt-key add -
+sudo apt update -y
+sudo apt install cephadm -y
 
 ## Reboot to make the world happy
 echo 'Time to reboot the server'
